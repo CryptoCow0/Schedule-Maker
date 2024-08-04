@@ -53,3 +53,41 @@ The primary data structure used is vectors, as they provide reliability and ease
       cout << "The minimum amount of staff is 8, not " << NumOfStaff << ". Try again: ";
       cin >> NumOfStaff;
   }
+
+
+  ### Test Three: Staff Level Validation
+
+- **Input**: Staff level
+- **Validation**: Ensures the staff level is either 1, 2, or 3.
+- **Code Example**:
+    ```cpp
+    while (staffLevel != 1 && staffLevel != 2 && staffLevel != 3) {
+        cout << "Input 1, 2, or 3. Current input: " << staffLevel << endl;
+        cout << "Input: ";
+        std::cin >> staffLevel;
+    }
+    StaffLevelList.push_back(staffLevel);
+    staffLevel = 0;
+    ```
+- **Expected Result**: The program prompts for valid input if an incorrect staff level is provided.
+
+### Test Four: Insufficient Management Levels
+
+- **Scenario**: All staff have management level 1.
+- **Result**: The system generates a temporary text file indicating insufficient management levels to create a valid schedule.
+
+### Test Five: Handling Negative Numbers
+
+- **Scenario**: Negative numbers for staff levels.
+- **Code Example**:
+    ```cpp
+    std::cin >> staffLevel;
+    staffLevel = abs(staffLevel);
+    ```
+
+### Test Six: Schedule Editing
+
+- **Scenario**: Editing the schedule by removing a staff member (e.g., Sabrina).
+- **Expected Result**: The schedule is updated to reflect the removal of the staff member, and adjustments are made accordingly.
+- **Actual Result**: The firing system correctly adjusts the schedule, ensuring coverage with minimal disruption.
+
