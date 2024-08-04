@@ -1,0 +1,165 @@
+Title: AppleWood Athletic club schedule maker
+Problem Descrriptions:
+    This is a tailoyerd speffic schedule maker for the place I work at. Due to the fact that the pool I work at is a small
+    buisness it is common that a lot of the responsiblites fall on the lifgarud
+    Therefore this schedule should create a file for a potential schedule for the week
+    that would fuffill all the conditions that needed for the pool at applewood atheltic Club.
+    This "Product" is desinged to be used by smart users who understand their levels of heirchy in the pool.
+
+Program Documentation:
+    The way the program runs is I figured it would be best if the user has to input their information regarding 
+    How many people they want to work at the pool and the staff level for each person and from there run an algorithm to determine if it was 
+    first of all able to create a schedule and if so, how the schedule would work for each day. By appending
+    the users into a vector of type string and determing that everyone would be working 40 hours I decided to decided who
+    was going to work by ranomly picking a person within that vector and adding them to another one
+    This other vector after adding eight people because eight people are the minimum needed to work in AAC,
+    would then check if it was possible for individuals to work by checking if Opening and Closing Jobs could be done.
+    Both of these were functions inside the Staff class that would return true if the people had a certain mangement level which
+    was present beforhand. If I had more time one thing that I would have wanted to do is to create a better display for the schedule currently
+    it just makes a seperate text file, but it would have been awesome to create a GUI for this project. Another thing was implement a more complicated algorithm
+    that would be able to adjust as people called in sick or if they needed to be swap with someone but the complextity proved to be too chanalnging. Antoher thing would have 
+    been more testing, because while it seems to work consitently for me, I worry that there is an edge case that I might have missed which will cause the user
+    more frustration that actualy use.
+
+
+List Data strucutre: The data strucutre that I used were mostly vectors because those were the ones I was the most confident in and by having confidence in the actual coding I 
+could then focus on trying to create a sufficient algorithm in which a pool staff could actually be made without alteration.
+
+
+Test:
+    Tests were the hardest part about this program but here are 5 Clear base test that have worked with consientancy:
+    
+        This test was the hardest one by far it took several attemps to get it working and there's potentially
+        many edge cases that with more time could've been found.
+
+
+
+        That being said numbers 8-14 work the best as that is How AAC usually has a staffing
+        there needs to be at least 3 girl's with Mangement abilites and at least 3 Guys with Mangement abilites
+        From there the rest can be 1's
+
+    Test One: 
+        Staff Amount 8:
+        Names:     Level:
+            Miguel   2
+            Kellen   2
+            Clara    3
+            Ava      3
+            Judy     3
+            Darain   1
+            Sabrina  3
+            Kate     1
+        expected result:
+            A schedule could be made under these conditions because there is enough level 2 and level there
+        Result:
+            A randomized schedule was made (the reason it's random is so everyone can work with everyone else)
+        
+
+    Test Two: (Input Validation)
+
+                Staff Amoung 8:
+
+                stolen from line 46 from functions.cpp
+                This line right here should ensure that the number of staff is at least 8 because if it's less than that the pool will not be able to open.
+
+                while(NumOfStaff < 8){
+                    cout << "The minimun amount of staff is 8 not " << NumOfStaff << endl << " Try again: ";
+                    cin >> NumOfStaff;
+
+                }
+
+    Test three: (input Validation)
+                while(staffLevel != 1 && staffLevel != 2 && staffLevel != 3){
+                            cout << "Input 1 2 or 3. " << staffLevel << endl;
+                            cout << "Input: ";
+                            std::cin >>  staffLevel;
+                        
+                        }
+                        StafflevelList.push_back(staffLevel);
+                        staffLevel = 0;
+                
+
+                expected result: 
+                    If the user puts in a number when assignming mangement that doesn't work
+                    it will ask them to input again.
+    
+    Test four (cannot make a staff)
+    
+
+        If you input only a staff with mangement level 1. It will not make a staff and will result in creating a temproary text file while
+        the code is open that tells you there isn't enough mangement to make a text file.
+
+
+    Test Five (Negative numbers )
+        By adding this line of code it ensure that if they add a negative number
+        by accident it will just take in the number and just make it positive.
+        std::cin >>  staffLevel;
+        staffLevel = abs(staffLevel);
+
+    Test six (Working schedule editing) 
+
+
+        Example tests that work:
+
+                Size: 8
+                Name:       Level:
+                Miguel        2
+                Jack         2
+                Clara         3
+                Ava           3
+                Kate          3
+                Sydney        1
+                kailey         1
+                Sabrina        3
+
+            Editing:
+                Firing Sabrina:
+            
+            resutl expected: (Preivious result - sabrina):
+
+                Staff for the day Jack Ava kailey Kate Clar Migue Sabrina Sydney 
+                Staff for the day Kate kailey Sabrina Ava Clar Sydney Migue Jack 
+                Staff for the day Migue Sydney Sabrina Kate Ava kailey Jack Clar 
+                Staff for the day Kate Ava kailey Clar Migue Sydney Jack Sabrina 
+                Staff for the day Kate Clar Migue kailey Ava Sabrina Jack Sydney 
+                Staff for the day Jack Ava Sabrina Clar Migue Sydney Kate kailey 
+                Staff for the day Sydney Jack Migue Clar Kate Ava Sabrina kailey 
+
+            Actual result:
+
+
+                
+            Staff for the day Jack Ava kailey Kate Clar Migue Sydney 
+            Staff for the day Kate kailey Ava Clar Sydney Migue Jack 
+            Staff for the day Migue Sydney Kate Ava kailey Jack Clar 
+            Staff for the day Kate Ava kailey Clar Migue Sydney Jack 
+            Staff for the day Kate Clar Migue kailey Ava Jack Sydney 
+            Staff for the day Jack Ava Clar Migue Sydney Kate kailey 
+            Staff for the day Sydney Jack Migue Clar Kate Ava kailey kailey 
+
+
+        Analsysis: By the firing system works well. Becuase there is 8 people needed to run when
+        one person if fired and there are 8 one person will have to work once more on the weekends to compensate.
+
+
+
+
+
+
+
+Reflections:
+    The biggest thing I learned about this project is there are a lot of things
+    that are done by humans that become a littel impratcial to be done by computers. Another thing that was learned was that when riighitng complex codes, it is better to take pencil and paper
+    and try to approach it as a math problem because taking math and implementing it into 
+    psudeocode becomes quicker than trying to be creative with code.
+    
+
+
+
+    
+
+
+
+
+
+
